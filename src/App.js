@@ -1,43 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function SimpleForm() {
-  const [books, setBooks] = useState([]);
-
-  return (
-    <form>
-      <div>
-        {books.map((book) => {
-          return (
-                <ul>
-                  <li>Book Id : {book.id}</li>
-                  <li>Book Title : {book.title}</li>
-                  <li>Book Author : {book.author}</li>
-                  <li>Book Qty : {book.qty}</li>
-                </ul>
-          );
-        })}
-      </div>
-      <button type="button" onClick={
-        () => {
-          fetch('http://localhost:5169/api/Books')
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              setBooks(data);
-            })
-            .catch(err => {
-              console.log(err);
-            })
-        }
-      }>GetBooks</button>
-    </form>
-  );
-}
+import Books from './Pages/Books';
+import Users from './Pages/Users';
+import BurrowRequests from './Pages/BurrowRequests';
 
 function App() {
   return (
     <div>
-      <SimpleForm />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/Books' element={<Books />} />
+          <Route path='/Users' element={<Users />} />
+          <Route path='/BurrowRequests' element={<BurrowRequests />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
