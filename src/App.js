@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+function SimpleForm() {
+  const [books, setBooks] = useState([]);
+
+  return (
+    <form>
+      <div>
+        {books.map((book) => {
+          return (
+                <ul>
+                  <li>Book Id : {book.id}</li>
+                  <li>Book Title : {book.title}</li>
+                  <li>Book Author : {book.author}</li>
+                  <li>Book Qty : {book.qty}</li>
+                </ul>
+          );
+        })}
+      </div>
+      <button type="button" onClick={
+        () => {
+          fetch('http://localhost:5169/api/Books')
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              setBooks(data);
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+      }>GetBooks</button>
+    </form>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SimpleForm />
     </div>
   );
 }
