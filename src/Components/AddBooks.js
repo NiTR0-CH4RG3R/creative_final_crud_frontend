@@ -45,7 +45,7 @@ export default function AddBooks() {
                 <Form.Label>Qty</Form.Label> <Form.Control type="number" placeholder="Enter Book Quatity" onChange={(e) => setBookQty(e.target.value)} />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={post_book( bookId, bookTitle, bookAuthor, bookQty )}>
                 Submit
             </Button>
         </Form>
